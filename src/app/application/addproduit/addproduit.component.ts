@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddproduitComponent implements OnInit {
 
+  lesCategories: string[] = [
+    'Fourniture', 'Vêtements', 'Accessoires', 'Informatique', 'Meubles'];
   constructor() { }
 
   ngOnInit(): void {
