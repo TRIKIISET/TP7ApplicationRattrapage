@@ -15,7 +15,7 @@ export class AddproduitComponent implements OnInit {
 
     produit:Produit= new Produit(0,"",false,"Tunisie","Meubles");
   constructor(private produitService:ProduitService) { }
-
+message:string="Votre nouveau produit a bien été ajouté";
   onSubmit(f:NgForm){
     console.log(this.produit);
     console.log(f.value);
@@ -24,7 +24,10 @@ export class AddproduitComponent implements OnInit {
     
     
   }
-
+  onVider(f:NgForm){
+      f.resetForm({categ:'Fourniture', madeIn:'Tunisie'});
+      
+  }
   ngOnInit(): void {
   }
 

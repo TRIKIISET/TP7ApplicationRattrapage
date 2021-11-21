@@ -1,15 +1,26 @@
 <div class="container">
     <h3>Ajout d'un produit</h3>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
         <div>
             <label> Référence du produit </label>
-            <input type="number" name="reference" class="form-control" [(ngModel)]="produit.reference">
+            <input type="number" name="reference" #n="ngModel"
+            required class="form-control" [(ngModel)]="produit.reference">
+        </div>
+        <div *ngIf="n.invalid && n.dirty" class="alert alert-danger">
+            La référence doit être un nombre
         </div>
         <div>
             <label>Libellé</label>
-            <input type="text" name="lib" class="form-control"[(ngModel)]="produit.libelle">
+            <input type="text" name="lib" required #l="ngModel"
+            pattern = "[A-Z][a-zA-Z]+"
+            class="form-control"[(ngModel)]="produit.libelle">
         </div>
-    
+        <div *ngIf="l.errors?.required && l.dirty" class="alert alert-danger">
+            La libellé est obligatoire
+        </div>
+        <div [hidden]="!l.errors?.pattern || l.pristine" class="alert alert-danger">
+            La pattern est erroné
+        </div>
         <div>
             <label> Made In </label>
             <label>
@@ -31,10 +42,14 @@
             </label>
         </div>
     
-        <input type="submit" value="Ajouter" class="btn btn-danger">
-        <input type="button" value="Vider" class="btn btn-success">
+        <input type="submit" [disabled]="f.invalid" value="Ajouter" class="btn btn-danger">
+        <input type="button" value="Vider" (click)="onVider(f)" class="btn btn-success">
     
     </form>
+    <div *ngIf="f.submitted">
+        {{message}}
+    </div>
+ 
 </div>
 
 
