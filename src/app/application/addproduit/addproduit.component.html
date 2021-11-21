@@ -1,35 +1,40 @@
-<h3>Ajout d'un produit</h3>
-<form>
-    <div>
-        <label> Référence du produit </label>
-        <input type="number" name="reference">
-    </div>
-    <div>
-        <label>Libellé</label>
-        <input type="text" name="lib">
-    </div>
+<div class="container">
+    <h3>Ajout d'un produit</h3>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div>
+            <label> Référence du produit </label>
+            <input type="number" name="reference" class="form-control" [(ngModel)]="produit.reference">
+        </div>
+        <div>
+            <label>Libellé</label>
+            <input type="text" name="lib" class="form-control"[(ngModel)]="produit.libelle">
+        </div>
+    
+        <div>
+            <label> Made In </label>
+            <label>
+                <input type="radio" name="madeIn" value="Tunisie" [(ngModel)]="produit.madeIn">Tunisie
+            </label>
+            <label>
+                <input type="radio" name="madeIn" value="Autre" [(ngModel)]="produit.madeIn">Autre
+            </label>
+        </div>
+        <div>
+            <label>Catégorie</label>
+            <select name="categ" class="form-select" [(ngModel)]="produit.categorie">
+                <option *ngFor="let c of lesCategories" [value]="c">{{c}}</option>
+            </select>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="nouv" [(ngModel)]="produit.nouveau"> Nouveau
+            </label>
+        </div>
+    
+        <input type="submit" value="Ajouter" class="btn btn-danger">
+        <input type="button" value="Vider" class="btn btn-success">
+    
+    </form>
+</div>
 
-    <div>
-        <label> Made In </label>
-        <label>
-            <input type="radio" name="madeIn" value="Tunisie">Tunisie
-        </label>
-        <label>
-            <input type="radio" name="madeIn" value="Autre">Autre
-        </label>
-    </div>
-    <div>
-        <label>Catégorie</label>
-        <select name="categ">
-        </select>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" name="nouv"> Nouveau
-        </label>
-    </div>
 
-    <input type="submit" value="Ajouter">
-    <input type="button" value="Vider">
-
-</form>

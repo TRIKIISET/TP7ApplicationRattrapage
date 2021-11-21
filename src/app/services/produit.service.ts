@@ -10,4 +10,12 @@ export class ProduitService {
     {reference:23, libelle:'cartable', nouveau:true, madeIn:"Autre", categorie: "Fourniture"},
   ];
   constructor() { }
+  public getProduits(){
+    return this.lesProduits;
+  }
+
+  public addProduit(p:Produit){
+      let p1:Produit = Object.assign({}, p);
+      this.lesProduits.push(p1);
+  }
 }
